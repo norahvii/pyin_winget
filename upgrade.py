@@ -33,7 +33,7 @@ if os.path.exists(exclusions_file):
             exclusion = line.strip()
             if exclusion:
                 exclusions.add(exclusion)
-                print(f"Added [{RED}{exclusion}][RESET] to list of exclusions.")
+                print(f"Added [{RED}{exclusion}]{RESET} to list of exclusions.")
 
 print("---------------------------------------")
 
