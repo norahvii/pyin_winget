@@ -1,11 +1,10 @@
-import subprocess
 import re
 import os
+import subprocess
 
 # Run "winget upgrade" command and extract the list of package IDs
 upgrade_output = subprocess.check_output(['winget', 'upgrade']).decode('utf-8')
 lines = upgrade_output.split('\n')
-
 
 package_ids = []
 
@@ -23,6 +22,9 @@ for match in matches:
 print("---------------------------------------")
 
 # Read the exclusions from the "exclusions.txt" file
+
+RED = "\033[91m"
+RESET = "\033[0m"
 exclusions = set()
 exclusions_file = "exclusions.txt"
 if os.path.exists(exclusions_file):
@@ -31,7 +33,9 @@ if os.path.exists(exclusions_file):
             exclusion = line.strip()
             if exclusion:
                 exclusions.add(exclusion)
-                print(f"Added {exclusion} to list of exclusions.")
+                print(f"Added [{RED}{exclusion}][RESET] to list of exclusions.")
+
+print("---------------------------------------")
 
 # Filter out excluded package IDs
 remaining_ids = [package_id for package_id in package_ids if package_id not in exclusions]
